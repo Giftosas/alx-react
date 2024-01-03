@@ -1,8 +1,4 @@
-button {
-	text-align: right;
-}
-
-button > span {
-	font-style:normal;
+#count {
+	display: inline;
 	font-weight: bold;
 }
