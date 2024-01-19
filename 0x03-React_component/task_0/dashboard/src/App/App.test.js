@@ -1,59 +1,40 @@
 import { shallow } from 'enzyme';
-import App from './App';
 import React from 'react';
-import Notifications from '../Notifications/Notifications';
-import Header from '../Header/Header';
-import Login from '../Login/Login';
-import Footer from '../Footer/Footer';
-import CourseList from '../CourseList/CourseList';
+import App from './App';
 
-// this is a shitty test btw
-describe('Test App.js', () => {
-  it('App without crashing', (done) => {
-    expect(shallow(<App />).exists());
-    done();
-  });
-
-  it('div with the class App-header', (done) => {
+describe('<App />', () => {
+  it('renders without crashing', () => {
     const wrapper = shallow(<App />);
-    expect(wrapper.contains(<header className='App-header' />))
-    done()
   });
 
-  it('div with the class App-body', (done) => {
+  it('contain Notifications component', () => {
     const wrapper = shallow(<App />);
-    expect(wrapper.contains(<body className='App-body' />))
-    done();
+    expect(wrapper.find('Notifications')).toHaveLength(1);
   });
 
-  it('div with the class App-footer', (done) => {
+  it('contain Header component', () => {
     const wrapper = shallow(<App />);
-    expect(wrapper.contains(<footer className='App-footer' />))
-    done();
+    expect(wrapper.find('Header')).toHaveLength(1);
   });
 
-  it('App contains the notifications component', () => {
-    const appWrapper = shallow(<App />);
-    expect(appWrapper.containsMatchingElement(<Notifications />, <Header />, <Footer />, <Login />)).toBe(false);
+  it('contain Login component', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find('Login')).toHaveLength(1);
   });
 
-  it('App does not render course list if logged out', () => {
-    const appWrapper = shallow(<App/>);
-    appWrapper.setProps({ isLoggedIn: false })
-    expect(appWrapper.contains(<CourseList />)).toBe(false);
+  it('contain Footer component', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find('Footer')).toHaveLength(1);
   });
 
-  // When isLoggedIn is true, and add two checks. The first one should verify that the Login component is not included. The second one should verify that the CourseList component is included
-  it('App does not render courselist if logged out', () => {
-		const appWrapper = shallow(<App />);
-		appWrapper.setProps({ isLogedIn: false });
-		expect(appWrapper.contains(<CourseList />)).toBe(false);
+  it('CourseList', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find('CourseList')).toHaveLength(0);
   });
 
-  it('App renders courselist if logged in', () => {
-    const appWrapper = shallow(<App />);
-    appWrapper.setProps({ isLoggedIn: true });
-    expect(appWrapper.contains(<CourseList />)).toBe(false);
-    expect(appWrapper.contains(<Login />)).toBe(false);
-  })
+  it('isLoggedIn true', () => {
+    const wrapper = shallow(<App isLoggedIn />);
+    expect(wrapper.find('Login')).toHaveLength(0);
+    expect(wrapper.find('CourseList')).toHaveLength(1);
+  });
 });
