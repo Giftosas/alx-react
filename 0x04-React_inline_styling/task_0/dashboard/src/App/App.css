@@ -1,13 +1,8 @@
-body {
-  max-width: 90%;
-  margin: 0 auto;
-}
-
-div {
-  padding: 2px 8px;
-}
-
 .App {
-  position: relative;
-  min-height: 100vh;
+  border-bottom: 4px solid var(--principal-color);
 }
+
+.App-body {
+    display: flex;
+    justify-content: center;
+  }

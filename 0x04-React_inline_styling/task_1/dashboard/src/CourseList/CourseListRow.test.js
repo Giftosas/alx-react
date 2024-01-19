@@ -1,18 +1,29 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import { expect } from 'chai';
-import CourseListRow from './CourseListRow';
+/**
+ * @jest-environment jsdom
+ */
 
-describe('CourseList render', () => {
-    it('CourseList should render without errors', () => {
-        const wrapper = shallow(<CourseListRow />);
-        expect(wrapper.exists()).equal(true);
-    })
+import { shallow } from "enzyme";
+import React from "react";
+import CourseListRow from "./CourseListRow";
 
-    it('CourseList should render one cell with colspan=2 when textSecondCell does not exist', () => {
-        const wrapper = shallow(<CourseListRow isHeader={true} textSecondCell={null} testFirstCell='cell' />);
+describe('Test CourseListRow.js', () => {
+  it('CourseListRow  render without crashing', () => {
+    expect(shallow(<CourseListRow textFirstCell='test' />).exists());
+  });
 
-        expect(wrapper.find('tr').children()).to.have.lengthOf(1);
-        expect(wrapper.find('th').props()).to.have.property('colSpan', '2');
-    })
-})
+  it('render isHeader is True and render with one th', () => {
+    const wrapper = shallow(<CourseListRow isHeader={true} textFirstCell='test' />);
+    expect(wrapper.find('th')).toHaveLength(1);
+    expect(wrapper.find('th').prop('colSpan')).toEqual("2");
+  });
+
+  it('render isHeader is True and render with two th', () => {
+    const wrapper = shallow(<CourseListRow isHeader={true} textFirstCell='test' textSecondCell='test' />);
+    expect(wrapper.find('th')).toHaveLength(2);
+  });
+
+  it('render isHeader is False and with two td', () => {
+    const wrapper = shallow(<CourseListRow isHeader={false} textFirstCell='test' textSecondCell='test' />);
+    expect(wrapper.find('td')).toHaveLength(2);
+  });
+});

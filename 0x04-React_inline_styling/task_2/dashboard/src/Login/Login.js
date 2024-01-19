@@ -1,50 +1,30 @@
-import React from 'react';
-import { StyleSheet, css } from 'aphrodite/no-important';
+import React from "react";
+import { css, StyleSheet } from 'aphrodite';
 
-export default function Login() {
-    return (
-        <div className={css(styles.AppBody)}>
-            <p>
-                Login to access the full dashboard
-            </p>
-            <form className={css(styles.AppBodyForm)}>
-                <div>
-                    <label htmlFor="email" className={css(styles.AppBodyLabel)}>
-                        Email
-                    </label>
-                    <input type="email" name="email" className={css(styles.AppBodyInput)}/>
-                </div>
-                <div>
-                    <label htmlFor="password" className={css(styles.AppBodyLabel)}>
-                        Password
-                    </label>
-                    <input type="password" name="password" className={css(styles.AppBodyInput)}/>
-                </div>
-                <button type="submit" className={css(styles.AppBodyButton)}>OK</button>
-            </form>
-        </div>
-    )
-}
 
 const styles = StyleSheet.create({
-    AppBody: {
-        padding: '36px 24px'
-    },
-    AppBodyInput: {
-        padding: '0 16px 0 8px',
-        border: '1px solid #D3D3D3',
-        borderRadius: '3px'
-    },
-    AppBodyLabel: {
-        marginRight: '5px'
-    },
-    AppBodyForm: {
-        display: 'flex',
-        gap: '1rem'
-    },
-    AppBodyButton: {
-        border: '1px solid #D3D3D3',
-        borderRadius: '3px',
-        background: 'transparent'
-    }
+  bodyLogin: {
+    margin: '50px 0 300px 0px',
+    flexGrow: 1
+  },
+  bodyLoginInput: {
+    margin: '0 10px 0 0px'
+  }
 })
+
+function Login() {
+  return (
+    <div className='body-login'>
+      <div className={css(styles.bodyLogin)}>
+        <p>Login to access the full dashboard</p>
+        <label htmlFor="fname">Email:</label>
+        <input type="email" id="email" className={css(styles.bodyLoginInput)}/>
+        <label htmlFor="lname">Password:</label>
+        <input type="password" id="password" className={css(styles.bodyLoginInput)}/>
+        <button>OK</button>
+      </div>
+    </div>
+  );
+}
+
+export default Login;

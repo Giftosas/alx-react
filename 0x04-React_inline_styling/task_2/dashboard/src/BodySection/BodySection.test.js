@@ -1,20 +1,21 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import BodySection from './BodySection';
+import { StyleSheetTestUtils } from 'aphrodite';
 
-describe('BodySection renders', () => {
-    it('BodySection should render without errors', () => {
-        const bodySectionWrapper = shallow(<BodySection />);
-        expect(bodySectionWrapper.exists()).equal(true);
-    });
+StyleSheetTestUtils.suppressStyleInjection();
 
-    it(' checking that shallowing the component should render correctly the children and one h2 element', () => {
-        const wrapper = shallow(<BodySection title="test title"><p>test children node</p></BodySection> );
-        const h = wrapper.find('h2').text();
-        const p = wrapper.find('p').text();
-        expect(h).equal("test title");
-        expect(p).equal("test children node");
-        expect(wrapper.containsAllMatchingElements([h, p])).equal(true);
-      });
+describe('<BodySection />', () => {
+  it('renders a <BodySection /> component', () => {
+		const wrapper = shallow(
+			<BodySection title="test title">
+				<p>test children node</p>
+			</BodySection>
+		);
+		expect(wrapper).toHaveLength(1);
+		expect(wrapper.find('h2').length).toEqual(1);
+		expect(wrapper.find('h2').text()).toEqual('test title');
+		expect(wrapper.find('p').length).toEqual(1);
+		expect(wrapper.find('p').text()).toEqual('test children node');
+	});
 });

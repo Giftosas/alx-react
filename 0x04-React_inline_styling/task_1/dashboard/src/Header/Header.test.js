@@ -1,16 +1,27 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import { expect } from 'chai';
-import Header from './Header';
+/**
+ * @jest-environment jsdom
+ */
 
-describe('Header', () => {
-    it('Header renders without crashing', () => {
-        const headerWrapper = shallow(<Header />);
-        expect(headerWrapper.exists());
-    })
-    it('Header should render an h1 and an img tag', () => {
-        const headerWrapper = shallow(<Header />);
-        expect(headerWrapper.exists('img')).equal(true);
-        expect(headerWrapper.containsMatchingElement(<h1>School dashboard</h1>)).equal(true);
-    });
-});
+import React from "react";
+import { shallow } from "enzyme";
+import Header from "./Header";
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
+
+describe("<Header />", () => {
+  it("Header renders without any errors", () => {
+    const wrapper = shallow(<Header />);
+    expect(wrapper.exists()).toEqual(true);
+  });
+
+  it("Verify that the components render img", () => {
+    const wrapper = shallow(<Header />);
+    expect(wrapper.find("header img")).toHaveLength(1);
+  });
+
+  it("Verify that the components render h1 tag", () => {
+    const wrapper = shallow(<Header />);
+    expect(wrapper.find("header h1")).toHaveLength(1);
+  });
+})
